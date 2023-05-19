@@ -1,5 +1,28 @@
 /* Import */
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+//@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+/* Font */
+@font-face {
+  font-family: "Avenir";
+  src: local("Avenir"), url("./assets/font/avenir_regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "AvenirLight";
+  src: local("AvenirLight"), url("./assets/font/avenir_light.woff") format("woff");
+}
+@font-face {
+  font-family: "AvenirHeavy";
+  src: local("AvenirHeavy"), url("./assets/font/avenir_heavy.woff") format("woff");
+}
+@font-face {
+  font-family: "AvenirBook";
+  src: local("AvenirBook"), url("./assets/font/avenir_book.woff") format("woff");
+}
+@font-face {
+  font-family: "AvenirBlack";
+  src: local("AvenirBlack"), url("./assets/font/avenir_black.woff") format("woff");
+}
 
 /* Reset */
 * {
@@ -36,7 +59,10 @@ h1 {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #2c3e50;
+  //font-family: "Roboto", sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-weight: 500;
