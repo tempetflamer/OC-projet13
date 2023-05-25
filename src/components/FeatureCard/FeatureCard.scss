@@ -1,0 +1,64 @@
+.features {
+    display: flex;
+    flex-direction: column;
+    @media (min-width: 920px) {
+        flex-direction: row;
+    }
+
+    &__icon {
+        border: 10px solid #00bc77;
+        border-radius: 50%;
+        padding: 1rem;
+        width: 6.25rem; //10px
+    }
+
+    &__item {
+        flex: 1;
+        padding: 2.5rem;
+
+        &__title {
+            color: #222;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+    }
+}
+
+/*
+* old code
+.featurecard {
+}
+
+.featureIcon {
+    border: 10px solid #00bc77;
+    border-radius: 50%;
+    padding: 1rem;
+    width: 6.25rem; //10px
+}
+
+.featureItem {
+    flex: 1;
+    padding: 2.5rem;
+}
+
+.featureItemTitle {
+    color: #222;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+@media (min-width: 920px) {
+    .features {
+        flex-direction: row;
+    }
+}
+
+*/

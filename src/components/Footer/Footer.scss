@@ -1,10 +1,22 @@
-.hooter {
-    margin-top: auto;
-    width: 100%;
-    background-color: black;
-    padding-top: 4rem;
+// .hooter {
+//     margin-top: auto;
+//     width: 100%;
+//     background-color: black;
+//     padding-top: 4rem;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+.footer {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    border-top: 2px solid #ccc;
+    padding: 2rem 0 1.5rem;
+}
+
+.footer-text {
+    margin: 0;
+    padding: 0;
 }

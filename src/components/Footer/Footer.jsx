@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import './Footer.scss'
 
-export default function Footer ({ }) {
+export default function Footer () {
   return (
-    <div>Text</div>
+    <footer className="footer">
+      <p className="footer-text">Copyright 2020 Argent Bank</p>
+    </footer>
   )
 }
 

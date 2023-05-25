@@ -1,0 +1,16 @@
+@mixin media-query($key) {
+    $size: map-get($breakpoints, $key);
+    @media screen and (max-width: $size) {
+        @content;
+    }
+}
+
+@mixin flex-rows {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin flex-columns {
+    display: flex;
+    flex-direction: column;
+}
