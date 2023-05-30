@@ -7,15 +7,13 @@ import useUserLogin from '../../hooks/useUserLogin'
 //import Button from '../Button/Button'
 import ButtonLogin from '../Button/Button'
 import api from '../../utils/api.js'
-//import actions from '../../reducer.js'
-import * as actions from '../../reducer.js'
+//import actions from '../../reducer.js' // typeError: _reducer_js__WEBPACK_IMPORTED_MODULE_6__.default.get Token is not a function (L.54)
+import * as actions from '../../redux/reducer.js'
 
 export default function LoginForm() {
   const dispatch = useDispatch()
-  //soit navigate soit history => pour le moment j'ai aps encore étudier le fonctionnement de history et pas specialment d'utilité vu le projet
   const navigate = useNavigate()
-  const history = useNavigate()
-  const [userName, setUserName] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
@@ -24,7 +22,7 @@ export default function LoginForm() {
   const passwordRef = useRef()
   const stateLoginToken = useSelector((state) => state.user.token) // provient de store
 
-  // je pouraais aussi faire juste comme en js et uniquement récupérer le tout à la validfation de la forme mais ej suppose que cette form est plus adapté pour redux/react
+  // je pourrais aussi faire juste comme en js et uniquement récupérer le tout à la validfation de la forme mais ej suppose que cette form est plus adapté pour redux/react
 
   async function getUserAxios() {
     const res = await api.axiosProfile(stateLoginToken) // Appele de l'api
@@ -34,12 +32,7 @@ export default function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault() //éviter que il charge la page html
-
-    // aps possible un hook a besoin d'être chargé dans le corps de la page pas après le premeir rendu
-    // const { data, isLoading, error } = useUserLogin(userName, userPassword)
-    // console.log('data user: ', data)
-
-    //pl pas faire un message d'erreur en desosus de chaque élément
+    //localStorage.clear()
 
     console.log('username.ref', usernameRef, passwordRef)
     if ((usernameRef.current.value || passwordRef.current.value) === '' || (usernameRef.current.value || passwordRef.current.value) === ' ') {
@@ -47,11 +40,18 @@ export default function LoginForm() {
     } else {
       setErrorMessage('')
       try {
-        const email = userName // peut être changé après pour l'instant unsername gardé
-        const res = await api.axiosToken({ email, password })
+        //const email = username // peut être changé après pour l'instant unsername gardé
+        const res = await api.axiosToken({ email: username, password })
         if (res) {
-          //mon dispatch ne marche pas
-          dispatch(actions.getToken({ token: res, email: userName }))
+          // if (rememberMe === true) {
+          //   localStorage.setItem('remember', true)
+          //   localStorage.setItem('username', username)
+          //   localStorage.setItem('password', password)
+          // } else {
+          //   localStorage.setItem('remember', false)
+          // }
+          //mon dispatch ne marche pas, voir L10
+          dispatch(actions.getToken({ token: res, email: username }))
           console.log('dispatch passé')
         }
       } catch (error) {
@@ -64,20 +64,24 @@ export default function LoginForm() {
   useEffect(() => {
     if (stateLoginToken) {
       getUserAxios()
-      //history('/profile')
       navigate('/profile')
     }
     // if (errorMessage == '') {
     // } else {
     // }
-  }, [stateLoginToken, errorMessage])
+
+    // if (rememberMe) {
+    //   const res = api.axiosToken({ email: localStorage.getItem('username'), password: localStorage.getItem('password') })
+    //   dispatch(actions.getToken({ token: res, email: localStorage.getItem('username') }))
+    // }
+  }, [stateLoginToken, errorMessage, rememberMe])
 
   const handleRememberMe = (e) => {
     setRememberMe(e.target.checked)
   }
 
   const handleUsername = (e) => {
-    setUserName(e.target.value)
+    setUsername(e.target.value)
   }
 
   const handleUserPassword = (e) => {
@@ -95,18 +99,10 @@ export default function LoginForm() {
         <input type="password" id="password" onChange={handleUserPassword} ref={passwordRef} />
       </div>
       <div className="input-remember">
-        <input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMe} ref={rememberMeRef} />
         <label htmlFor="remember-me">Remember me</label>
+        <input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMe} ref={rememberMeRef} />
       </div>
       <span className="error-message">{errorMessage}</span>
-      {/* Bouton de test redirection */}
-      {/* <Link to="/user" className="btn btn-signup">
-        Sign In
-      </Link> */}
-      {/* <Link to="/user">
-        <Button className="btn-signup" text="Sign In" />
-      </Link> */}
-      {/* <ButtonLogin className="btn-signup" text="Sign In" /> */}
       <button className="btn btn-signup" type="submit">
         Sign In
       </button>

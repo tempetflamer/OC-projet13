@@ -6,16 +6,20 @@ import Button from '../Button/Button'
 export default function AccountCard({ title, amount, description }) {
   return (
     <section className="account">
-      <article className="accountContentWrapper">
-        <h3 className="accountTitle">{title}</h3>
-        <p className="accountAmount">{amount}</p>
-        <p className="accountAmountDescription">{description}</p>
+      <article className="account__content--Wrapper">
+        <h3 className="account__content__title">{title}</h3>
+        <p className="account__content__amount">{amount}</p>
+        <p className="account__content__desc">{description}</p>
       </article>
-      <div className="accountContentWrapper cta">
-        <Button className="btn-transaction" text="View transactions" />
+      <div className="account__content--Wrapper cta">
+        <Button className="btn btn-transaction" text="View transactions" />
       </div>
     </section>
   )
 }
 
-AccountCard.propTypes = {}
+AccountCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+}

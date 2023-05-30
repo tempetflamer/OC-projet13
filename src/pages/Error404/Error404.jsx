@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import './Error404.scss'
+import Layout from '../../components/Layout/Layout'
 
-
-export default function Error404 () {
+export default function Error404() {
   return (
+    <Layout>
       <div className="error">
         <div className="error__content">
           <p className="error__content__number">404</p>
@@ -15,9 +16,8 @@ export default function Error404 () {
           Retourner sur le tableau de bord / page de connexion
         </Link>
       </div>
+    </Layout>
   )
 }
 
-Error404.propTypes = {
-
-}
+Error404.propTypes = {}
