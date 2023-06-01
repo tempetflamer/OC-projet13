@@ -21,59 +21,26 @@ export default function LoginForm() {
   const usernameRef = useRef()
   const passwordRef = useRef()
   const stateLoginToken = useSelector((state) => state.user.token) // provient de store
-
-  // je pourrais aussi faire juste comme en js et uniquement récupérer le tout à la validfation de la forme mais ej suppose que cette form est plus adapté pour redux/react
-
-  async function getUserAxios() {
-    const res = await api.axiosProfile(stateLoginToken) // Appele de l'api
-    dispatch(actions.getUser({ firstName: res.firstName, lastName: res.lastName })) // envoi au reducer
-    console.log('res de getUserProfile', res)
-  }
+  const { getUserLogin } = useUserLogin()
 
   const handleSubmit = async (e) => {
-    e.preventDefault() //éviter que il charge la page html
-    //localStorage.clear()
+    e.preventDefault()
 
-    console.log('username.ref', usernameRef, passwordRef)
     if ((usernameRef.current.value || passwordRef.current.value) === '' || (usernameRef.current.value || passwordRef.current.value) === ' ') {
       setErrorMessage('You must fill all the fields')
     } else {
       setErrorMessage('')
-      try {
-        //const email = username // peut être changé après pour l'instant unsername gardé
-        const res = await api.axiosToken({ email: username, password })
-        if (res) {
-          // if (rememberMe === true) {
-          //   localStorage.setItem('remember', true)
-          //   localStorage.setItem('username', username)
-          //   localStorage.setItem('password', password)
-          // } else {
-          //   localStorage.setItem('remember', false)
-          // }
-          //mon dispatch ne marche pas, voir L10
-          dispatch(actions.getToken({ token: res, email: username }))
-          console.log('dispatch passé')
-        }
-      } catch (error) {
-        console.log(error)
-        setErrorMessage('User not found in database')
+      const res = await getUserLogin(username, password)
+      if (res.error) {
+        setErrorMessage(res.error)
       }
     }
   }
 
   useEffect(() => {
     if (stateLoginToken) {
-      getUserAxios()
       navigate('/profile')
     }
-    // if (errorMessage == '') {
-    // } else {
-    // }
-
-    // if (rememberMe) {
-    //   const res = api.axiosToken({ email: localStorage.getItem('username'), password: localStorage.getItem('password') })
-    //   dispatch(actions.getToken({ token: res, email: localStorage.getItem('username') }))
-    // }
   }, [stateLoginToken, errorMessage, rememberMe])
 
   const handleRememberMe = (e) => {
@@ -89,7 +56,7 @@ export default function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="login-form">
       <div className="input-wrapper">
         <label htmlFor="username">Username</label>
         <input type="text" id="username" onChange={handleUsername} ref={usernameRef} />

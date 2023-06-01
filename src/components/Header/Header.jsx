@@ -1,12 +1,11 @@
-import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import './Header.scss'
-import Logo from '../../assets/img/argent_bank_logo.png'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
-import { useSelector, useDispatch } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom'
+import Logo from '../../assets/img/argent_bank_logo.png'
 import * as actions from '../../redux/reducer.js'
+import './Header.scss'
 
 export default function Header() {
   const stateIsConnected = useSelector((state) => state.user.isConnected)
@@ -18,6 +17,7 @@ export default function Header() {
     dispatch(actions.logOut())
     navigate('/')
   }
+
   return (
     <header>
       <nav className="main-nav">

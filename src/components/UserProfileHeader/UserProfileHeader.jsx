@@ -1,43 +1,51 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './UserProfileHeader.scss'
 import api from '../../utils/api.js'
 import * as actions from '../../redux/reducer.js'
+import useUserEditName from '../../hooks/useUserEditName'
 
 export default function UserProfileHeader() {
   const stateToken = useSelector((state) => state.user.token) // provient de store
   const stateFirstName = useSelector((state) => state.user.firstName) // provient de store
   const stateLastName = useSelector((state) => state.user.lastName) // provient de store
-  const [firstName, setFirstName] = useState()
-  const [lastName, setLastName] = useState()
   const [errorMessage, setErrorMessage] = useState('')
   const [editName, setEditName] = useState(false)
-  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const firstNameRef = useRef()
+  const lastNameRef = useRef()
+  const { getUserEditName } = useUserEditName(stateToken)
 
   function displayFormEdit() {
     setEditName(!editName)
   }
 
+  //soit en async je ne suis pas sur de tout ettendre sinon
   async function editUser() {
-    const res = await api.axiosUserUpdate(stateToken, { firstName, lastName })
-    dispatch(actions.getUser({ firstName: res.firstName, lastName: res.lastName }))
-    setEditName(!editName)
+    if (
+      firstNameRef.current.value.trim() === (firstNameRef.current.defaultValue || '') &&
+      lastNameRef.current.value.trim() === (lastNameRef.current.defaultValue || '')
+    ) {
+      console.log('pas de modif')
+      setEditName(!editName)
+    } else {
+      console.log('ref de firstName & lastname', firstNameRef.current.value.trim(), lastNameRef.current.value.trim())
+
+      const res = await getUserEditName(firstNameRef.current.value.trim(), lastNameRef.current.value.trim())
+      console.log('res userProfile', res)
+      if (res === null) {
+        setErrorMessage('Server error, change failed')
+        return ''
+      }
+      setEditName(!editName)
+    }
   }
 
-  //faudra décalé cette vérification directement sur la page profile
-  useEffect(() => {
-    console.log('state token firstname, lastname', stateToken, stateFirstName, stateLastName)
-    if (!stateToken) {
-      navigate('/login')
-    }
-  }, [stateToken])
-
-  // if (!stateFirstName || !stateLastName) {
-  //   return ''
-  // }
+  if (!stateFirstName || !stateLastName) {
+    return ''
+  }
   return (
     <div className="profile__header">
       {!editName ? (
@@ -57,13 +65,14 @@ export default function UserProfileHeader() {
           <form>
             <div className="wrapper--edit">
               <label htmlFor="fisrtName">
-                <input type="text" id="fistname" className="input-edit" onChange={(e) => setFirstName(e.target.value)} placeholder={stateFirstName} />
+                <input type="text" id="fistname" className="input-edit" defaultValue={stateFirstName} ref={firstNameRef} />
               </label>
 
               <label htmlFor="lastName">
-                <input type="text" id="lastname" className="input-edit" onChange={(e) => setLastName(e.target.value)} placeholder={stateLastName} />
+                <input type="text" id="lastname" className="input-edit" defaultValue={stateLastName} ref={lastNameRef} />
               </label>
             </div>
+            <span className="error-message">{errorMessage}</span>
             <div className="wrapper--save">
               <button type="button" className="btn-save" onClick={() => editUser()}>
                 Save

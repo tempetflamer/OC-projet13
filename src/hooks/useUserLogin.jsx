@@ -1,49 +1,41 @@
-//the const is nopt exported anymore created a class a la place
-// import { api } from '../utils/api.js'
-// import { useEffect, useState } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../redux/reducer.js'
+import api from '../utils/api.js'
 
-// /**
-//  * Hook to get User Sessions
-//  * @function
-//  * @name useUserLogin
-//  * @param {number} id - user ID
-//  * @returns {object} - Return {data, isLoading, error} to manage the state of the hook
-//  */
-// export default function useUserLogin(userName, userPassword) {
-//   const [data, setData] = useState([])
-//   const [isLoading, setIsLoading] = useState(false)
-//   const [error, setError] = useState()
+export default function useUserLogin() {
+  const dispatch = useDispatch()
+  const stateToken = useSelector((state) => state.user.token) // provient de store
 
-//   useEffect(() => {
-//     setData([])
-//     setError(undefined)
-//     setIsLoading(true)
+  const getUserLogin = async (email, password) => {
+    try {
+      console.log('useUserName', email, password)
+      const res = await api.axiosToken({ email, password })
+      dispatch(actions.getToken({ token: res, email }))
+      console.log('res de getUserLogin', res)
+      return res
+    } catch (e) {
+      //gérer la gestion des erreur
+      console.log('e', e)
+      if (e === 'User not found!') {
+        const error = 'User not found in database'
+        return { error }
+      } else {
+        if (e === 'Password is invalid') {
+          const error = "User's password is invalid"
+          return { error }
+        } else {
+          //return null
+          const error = 'Server connection error'
+          return { error }
+        }
+      }
+    }
+  }
 
-//     /**
-//      * Set setData, setIsLoading, setError with User Average Session
-//      * @name getUserSession
-//      * @param {Number} id
-//      */
-//     const getUserLogin = async (userName, userPassword) => {
-//       try {
-//         const res = await api.get(`/user/login`)
-//         console.log('res :', res)
-//         setError(undefined)
-//         setIsLoading(false)
-//         setData(res.data.data)
-//       } catch (e) {
-//         setData([])
-//         setError(e)
-//         setIsLoading(false)
-//       }
-//     }
-//     getUserLogin(userName, userPassword)
-//   }, [])
-//   return { data, isLoading, error }
-// }
+  return { getUserLogin }
+}
 
-// useUserLogin.propTypes = {
-//   userName: PropTypes.string,
-//   userPassword: PropTypes.string,
-// }
+useUserLogin.propTypes = {
+  token: PropTypes.string,
+}
