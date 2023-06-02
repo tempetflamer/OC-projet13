@@ -1,8 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import './Error404.scss'
 import Layout from '../../components/Layout/Layout'
+import './Error404.scss'
 
 export default function Error404() {
   return (
@@ -19,5 +18,3 @@ export default function Error404() {
     </Layout>
   )
 }
-
-Error404.propTypes = {}

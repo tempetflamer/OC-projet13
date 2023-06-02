@@ -1,10 +1,9 @@
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import PropTypes from 'prop-types'
-import './Login.scss'
 import Layout from '../../components/Layout/Layout'
 import LoginForm from '../../components/LoginForm/LoginForm'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
+import './Login.scss'
 
 export default function Login() {
   return (
@@ -17,5 +16,3 @@ export default function Login() {
     </Layout>
   )
 }
-
-Login.propTypes = {}

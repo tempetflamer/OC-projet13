@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import produce from 'immer'
 
 const { actions, reducer } = createSlice({
     name: 'UserReducer',
@@ -12,7 +11,6 @@ const { actions, reducer } = createSlice({
     },
 
     reducers: {
-        //on verra
         getToken: (state, action) => {
             return {
                 ...state,
@@ -22,7 +20,6 @@ const { actions, reducer } = createSlice({
             }
 
         },
-        //on verra
         getUser: (state, action) => {
             return {
                 ...state,

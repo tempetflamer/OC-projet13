@@ -1,24 +1,17 @@
-import PropTypes from 'prop-types'
-import { useCallback, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useCallback, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import AccountCard from '../../components/AccountCard/AccountCard'
 import Layout from '../../components/Layout/Layout'
 import UserProfileHeader from '../../components/UserProfileHeader/UserProfileHeader'
 import { ACCOUNTS_CONTENT } from '../../data/data.js'
 import useUserProfile from '../../hooks/useUserProfile'
-import * as actions from '../../redux/reducer.js'
-import api from '../../utils/api'
 
 export default function Profile() {
-  const stateToken = useSelector((state) => state.user.token) // provient de store
+  const stateToken = useSelector((state) => state.user.token)
   const stateIsConnected = useSelector((state) => state.user.isConnected)
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { getUserProfile } = useUserProfile(stateToken)
-
-  const [firstName, setFirstName] = useState()
-  const [lastName, setLastName] = useState()
 
   const getData = useCallback(async () => {
     const res = await getUserProfile()
@@ -33,17 +26,6 @@ export default function Profile() {
     }
   }, [stateToken, getData, stateIsConnected])
 
-  // useEffect(() => {
-  //   console.log('state token firstname, lastname', stateToken, stateFirstName, stateLastName)
-  //   if (!stateToken) {
-  //     navigate('/login')
-  //   }
-  // }, [stateToken])
-
-  // if (!firstName || !lastName) {
-  //   return ''
-  // }
-
   return (
     <Layout className="main bg-dark">
       <UserProfileHeader />
@@ -54,5 +36,3 @@ export default function Profile() {
     </Layout>
   )
 }
-
-Profile.propTypes = {}

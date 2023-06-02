@@ -1,19 +1,14 @@
-import { useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import './UserProfileHeader.scss'
-import api from '../../utils/api.js'
-import * as actions from '../../redux/reducer.js'
+import { useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import useUserEditName from '../../hooks/useUserEditName'
+import './UserProfileHeader.scss'
 
 export default function UserProfileHeader() {
-  const stateToken = useSelector((state) => state.user.token) // provient de store
-  const stateFirstName = useSelector((state) => state.user.firstName) // provient de store
-  const stateLastName = useSelector((state) => state.user.lastName) // provient de store
+  const stateToken = useSelector((state) => state.user.token)
+  const stateFirstName = useSelector((state) => state.user.firstName)
+  const stateLastName = useSelector((state) => state.user.lastName)
   const [errorMessage, setErrorMessage] = useState('')
   const [editName, setEditName] = useState(false)
-  const navigate = useNavigate()
   const firstNameRef = useRef()
   const lastNameRef = useRef()
   const { getUserEditName } = useUserEditName(stateToken)
@@ -22,21 +17,16 @@ export default function UserProfileHeader() {
     setEditName(!editName)
   }
 
-  //soit en async je ne suis pas sur de tout ettendre sinon
   async function editUser() {
     if (
       firstNameRef.current.value.trim() === (firstNameRef.current.defaultValue || '') &&
       lastNameRef.current.value.trim() === (lastNameRef.current.defaultValue || '')
     ) {
-      console.log('pas de modif')
       setEditName(!editName)
     } else {
-      console.log('ref de firstName & lastname', firstNameRef.current.value.trim(), lastNameRef.current.value.trim())
-
       const res = await getUserEditName(firstNameRef.current.value.trim(), lastNameRef.current.value.trim())
-      console.log('res userProfile', res)
-      if (res === null) {
-        setErrorMessage('Server error, change failed')
+      if (res.error) {
+        setErrorMessage(res.error)
         return ''
       }
       setEditName(!editName)
@@ -87,5 +77,3 @@ export default function UserProfileHeader() {
     </div>
   )
 }
-
-UserProfileHeader.propTypes = {}

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import './Footer.scss'
 
 export default function Footer() {
@@ -9,5 +8,3 @@ export default function Footer() {
     </footer>
   )
 }
-
-Footer.propTypes = {}

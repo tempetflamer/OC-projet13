@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import './Layout.scss'
 
 export default function Layout({ children, className }) {
   const { pathname } = useLocation()

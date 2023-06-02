@@ -1,17 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router'
-import { Link, useNavigate } from 'react-router-dom'
-import './LoginForm.scss'
+import React, { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import useUserLogin from '../../hooks/useUserLogin'
-//import Button from '../Button/Button'
-import ButtonLogin from '../Button/Button'
-import api from '../../utils/api.js'
-//import actions from '../../reducer.js' // typeError: _reducer_js__WEBPACK_IMPORTED_MODULE_6__.default.get Token is not a function (L.54)
-import * as actions from '../../redux/reducer.js'
+import './LoginForm.scss'
 
 export default function LoginForm() {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -20,7 +13,7 @@ export default function LoginForm() {
   const rememberMeRef = useRef()
   const usernameRef = useRef()
   const passwordRef = useRef()
-  const stateLoginToken = useSelector((state) => state.user.token) // provient de store
+  const stateLoginToken = useSelector((state) => state.user.token)
   const { getUserLogin } = useUserLogin()
 
   const handleSubmit = async (e) => {
@@ -59,11 +52,11 @@ export default function LoginForm() {
     <form onSubmit={handleSubmit} className="login-form">
       <div className="input-wrapper">
         <label htmlFor="username">Username</label>
-        <input type="text" id="username" onChange={handleUsername} ref={usernameRef} />
+        <input type="text" id="username" onChange={handleUsername} ref={usernameRef} autoComplete="on" />
       </div>
       <div className="input-wrapper">
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" onChange={handleUserPassword} ref={passwordRef} />
+        <input type="password" id="password" onChange={handleUserPassword} ref={passwordRef} autoComplete="on" />
       </div>
       <div className="input-remember">
         <label htmlFor="remember-me">Remember me</label>

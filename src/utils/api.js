@@ -11,17 +11,21 @@ const apiUrl = axios.create({
 class api {
 
     /**
-     * 
-     * @param {*} params {userName, userPassword}
-     * @returns 
+     * Uses axios to connect the user to the API using the POST method
+     * @param {object} params {userName, userPassword}
+     * @returns {object} token
      */
     axiosToken = async (params) => {
         const response = await apiUrl.post('/user/login', params);
-        console.log('axiosToken : ', response)
         return response.data.body.token;
     }
 
     //look up user information
+    /**
+     * Uses axios to retrieve user's informations from the API using the POST method
+     * @param {string} token 
+     * @returns {object}
+     */
     axiosProfile = async (token) => {
         const response = await apiUrl.post('/user/profile', {}, {
             headers: {
@@ -31,7 +35,12 @@ class api {
         return response.data.body;
     }
 
-    //edit user information
+    /**
+     * Uses axios to edit user's informations (first name, last name) in the API using the PUT method
+     * @param {string} token 
+     * @param {object} newUser {firstName, lastName}
+     * @returns {object}
+     */
     axiosUserUpdate = async (token, newUser) => {
         const response = await apiUrl.put('/user/profile', newUser, {
             headers: {

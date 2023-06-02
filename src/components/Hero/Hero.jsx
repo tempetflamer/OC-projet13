@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import './Hero.scss'
 
 export default function Hero() {
@@ -15,5 +14,3 @@ export default function Hero() {
     </div>
   )
 }
-
-Hero.propTypes = {}

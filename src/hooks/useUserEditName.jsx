@@ -5,18 +5,21 @@ import api from '../utils/api.js'
 
 export default function useUserEditName() {
   const dispatch = useDispatch()
-  const stateToken = useSelector((state) => state.user.token) // provient de store
+  const stateToken = useSelector((state) => state.user.token)
 
   const getUserEditName = async (firstName, lastName) => {
     try {
-      console.log('useUserName', lastName, firstName)
       const res = await api.axiosUserUpdate(stateToken, { firstName, lastName })
       dispatch(actions.getUser({ firstName: res.firstName, lastName: res.lastName }))
-      console.log('res de getUserEditName', res)
       return res
     } catch (e) {
-      //gérer la gestion des erreur
-      return null
+      if (e === 'User not found!') {
+        const error = 'User not found in database'
+        return { error }
+      } else {
+        const error = 'Server connection error'
+        return { error }
+      }
     }
   }
 

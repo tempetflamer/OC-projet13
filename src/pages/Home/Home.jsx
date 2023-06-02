@@ -1,10 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
-import './Home.scss'
-import Layout from '../../components/Layout/Layout'
-import Hero from '../../components/Hero/Hero'
 import FeatureCard from '../../components/FeatureCard/FeatureCard'
+import Hero from '../../components/Hero/Hero'
+import Layout from '../../components/Layout/Layout'
 import { FEATURES_CARDS_CONTENT } from '../../data/data.js'
 
 export default function Home() {
@@ -20,5 +17,3 @@ export default function Home() {
     </Layout>
   )
 }
-
-Home.propTypes = {}
