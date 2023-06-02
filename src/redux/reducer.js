@@ -27,16 +27,6 @@ const { actions, reducer } = createSlice({
                 lastName: action.payload.lastName
             }
         },
-        logIn: (state, action) => {
-            return {
-                ...state,
-                isConnected: true,
-                token: `${action.payload.token}`,
-                email: action.payload.email,
-                firstName: action.payload.firstName,
-                lastName: action.payload.lastName
-            }
-        },
         logOut: (state) => {
             return {
                 ...state,
@@ -52,5 +42,5 @@ const { actions, reducer } = createSlice({
 })
 
 
-export const { getToken, getUser, logOut, logIn } = actions
+export const { getToken, getUser, logOut } = actions
 export default reducer
