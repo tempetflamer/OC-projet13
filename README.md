@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Openclassroom Project 13 - ArgentBank
+Use an API for a bank user account with React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![](https://raw.githubusercontent.com/tempetflamer/Assets/main/oc/oc13/argent_bank.png)
 
-## Available Scripts
+## Context
+You've just started work at Remede Agency, an agency specializing in web application development. The team is mainly made up of back-end developers, and has just started recruiting other front-end specialists. 
 
-In the project directory, you can run:
+## Missions
 
-### `npm start`
+<details>
+  <summary> <b><u><font size="+1">Users authentication</font></u></b></summary>
+Creation of a web application allowing customers to log in and manage their accounts and profiles.
+</details>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<details>
+    <summary> <b><u><font size="+1">Transactions</font></u></b></summary>
+  Specify the API endpoints required for a second mission.
+</details>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Resources provided
 
-### `npm test`
+[Backend link](https://github.com/tempetflamer/OC-projet13-backend)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Link to HTML mock-ups, wireframes and supplied images](https://github.com/tempetflamer/OC-projet13-backend/tree/master/designs)
 
-### `npm run build`
+[Swagger file provided](https://github.com/tempetflamer/OC-projet13-backend/blob/master/swagger.yaml)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Technology                                                | Use             |
+| ---------------------------------------------------------- | ----------------------- |
+| [NPM](https://www.npmjs.com/)                              | Packet manager |
+| [React](https://reactjs.org/)                              | Frontend                |
+| [React Router](https://reactrouter.com/)                   | Routing                 |
+| [Redux](https://redux.js.org/)                 | State Manager |
+| [Prop Types](https://www.npmjs.com/package/prop-types)     | Type checking    |
+| [Sass](https://sass-lang.com/)                             | Style (preprocessor)   |
+| [Prettier](https://prettier.io/)                           | Code formatting        |
+| [ESLint](https://eslint.org/)                              | Code analysis        |
+| [Font Awesome](https://www.npmjs.com/package/@fortawesome/fontawesome-free)                              | Icon library and toolkit |
+| [Axios](https://www.npmjs.com/package/axios)                              | Promise based HTTP client |
+| [Swagger](https://swagger.io/)                                | API Documentation           |
+| [Netlify](https://www.netlify.com/) | Deployment             |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### Installing the Frontend
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Clone the repository of ArgentBank Front-End:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`git clone https://github.com/tempetflamer/OC-projet13.git`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+install project dependencies:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`npm i`
 
-## Learn More
+Start Front-End:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`npm start`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Frontend is now rendered at URL: `http://localhost:3000`
