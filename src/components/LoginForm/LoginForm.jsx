@@ -10,7 +10,6 @@ export default function LoginForm() {
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
-  const rememberMeRef = useRef()
   const usernameRef = useRef()
   const passwordRef = useRef()
   const stateLoginToken = useSelector((state) => state.user.token)
@@ -60,7 +59,7 @@ export default function LoginForm() {
       </div>
       <div className="input-remember">
         <label htmlFor="remember-me">Remember me</label>
-        <input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMe} ref={rememberMeRef} />
+        <input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMe} />
       </div>
       <span className="error-message">{errorMessage}</span>
       <button className="btn btn-signup" type="submit">
