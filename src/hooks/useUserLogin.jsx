@@ -11,16 +11,13 @@ export default function useUserLogin() {
       dispatch(actions.getToken({ token: res, email }))
       return res
     } catch (e) {
-      if (e === 'User not found!') {
-        const error = 'User not found in database'
-        return { error }
+      if (e.response.data.message === 'Error: User not found!') {
+        return { error: 'User not found in database' }
       } else {
-        if (e === 'Password is invalid') {
-          const error = "User's password is invalid"
-          return { error }
+        if (e.response.data.message === 'Error: Password is invalid') {
+          return { error: "User's password is invalid" }
         } else {
-          const error = 'Server connection error'
-          return { error }
+          return { error: 'Server connection error' }
         }
       }
     }

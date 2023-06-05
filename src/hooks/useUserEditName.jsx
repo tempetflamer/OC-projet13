@@ -13,12 +13,10 @@ export default function useUserEditName() {
       dispatch(actions.getUser({ firstName: res.firstName, lastName: res.lastName }))
       return res
     } catch (e) {
-      if (e === 'User not found!') {
-        const error = 'User not found in database'
-        return { error }
+      if (e.response.data.message === 'Error: User not found!') {
+        return { error: 'User not found in database' }
       } else {
-        const error = 'Server connection error'
-        return { error }
+        return { error: 'Server connection error' }
       }
     }
   }

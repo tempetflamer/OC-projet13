@@ -33,7 +33,7 @@ export default function LoginForm() {
     if (stateLoginToken) {
       navigate('/profile')
     }
-  }, [stateLoginToken, errorMessage, rememberMe])
+  }, [stateLoginToken])
 
   const handleRememberMe = (e) => {
     setRememberMe(e.target.checked)

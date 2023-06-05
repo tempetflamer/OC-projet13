@@ -41,7 +41,6 @@ Creation of a web application allowing customers to log in and manage their acco
 | [Font Awesome](https://www.npmjs.com/package/@fortawesome/fontawesome-free)                              | Icon library and toolkit |
 | [Axios](https://www.npmjs.com/package/axios)                              | Promise based HTTP client |
 | [Swagger](https://swagger.io/)                                | API Documentation           |
-| [Netlify](https://www.netlify.com/) | Deployment             |
 
 
 ### Installing the Frontend

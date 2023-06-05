@@ -54,11 +54,11 @@ export default function UserProfileHeader() {
           <h1>Welcome back</h1>
           <form>
             <div className="wrapper--edit">
-              <label htmlFor="fisrtName">
+              <label htmlFor="fistname">
                 <input type="text" id="fistname" className="input-edit" defaultValue={stateFirstName} ref={firstNameRef} />
               </label>
 
-              <label htmlFor="lastName">
+              <label htmlFor="lastname">
                 <input type="text" id="lastname" className="input-edit" defaultValue={stateLastName} ref={lastNameRef} />
               </label>
             </div>
