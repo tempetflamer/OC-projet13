@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import useUserLogin from '../../hooks/useUserLogin'
+import * as actions from '../../redux/reducer.js'
 import './LoginForm.scss'
 
 export default function LoginForm() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -25,6 +27,8 @@ export default function LoginForm() {
       const res = await getUserLogin(username, password)
       if (res.error) {
         setErrorMessage(res.error)
+      } else {
+        dispatch(actions.getToken({ token: res, email: username }))
       }
     }
   }

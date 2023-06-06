@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import useUserEditName from '../../hooks/useUserEditName'
+import * as actions from '../../redux/reducer.js'
 import './UserProfileHeader.scss'
 
 export default function UserProfileHeader() {
+  const dispatch = useDispatch()
   const stateToken = useSelector((state) => state.user.token)
   const stateFirstName = useSelector((state) => state.user.firstName)
   const stateLastName = useSelector((state) => state.user.lastName)
@@ -29,6 +31,7 @@ export default function UserProfileHeader() {
         setErrorMessage(res.error)
         return ''
       }
+      dispatch(actions.getUser({ firstName: res.firstName, lastName: res.lastName }))
       setEditName(!editName)
     }
   }

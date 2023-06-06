@@ -1,20 +1,23 @@
 import { useCallback, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import AccountCard from '../../components/AccountCard/AccountCard'
 import Layout from '../../components/Layout/Layout'
 import UserProfileHeader from '../../components/UserProfileHeader/UserProfileHeader'
 import { ACCOUNTS_CONTENT } from '../../data/data.js'
 import useUserProfile from '../../hooks/useUserProfile'
+import * as actions from '../../redux/reducer.js'
 
 export default function Profile() {
   const stateToken = useSelector((state) => state.user.token)
   const stateIsConnected = useSelector((state) => state.user.isConnected)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { getUserProfile } = useUserProfile(stateToken)
 
   const getData = useCallback(async () => {
     const res = await getUserProfile()
+    dispatch(actions.getUser({ firstName: res.firstName, lastName: res.lastName }))
   }, [])
 
   useEffect(() => {
