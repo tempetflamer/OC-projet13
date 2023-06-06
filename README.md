@@ -43,7 +43,7 @@ Creation of a web application allowing customers to log in and manage their acco
 | [Swagger](https://swagger.io/)                                | API Documentation           |
 
 
-### Installing the Frontend
+## Installing the Frontend
 
 Clone the repository of ArgentBank Front-End:
 
