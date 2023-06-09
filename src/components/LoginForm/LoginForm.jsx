@@ -8,8 +8,6 @@ import './LoginForm.scss'
 export default function LoginForm() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
   const usernameRef = useRef()
@@ -19,8 +17,10 @@ export default function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const username = await usernameRef.current.value.trim()
+    const password = await passwordRef.current.value.trim()
 
-    if (usernameRef.current.value.trim() === '' || passwordRef.current.value.trim() === '') {
+    if (username === '' || password === '') {
       setErrorMessage('You must fill all the fields')
     } else {
       setErrorMessage('')
@@ -43,23 +43,15 @@ export default function LoginForm() {
     setRememberMe(e.target.checked)
   }
 
-  const handleUsername = (e) => {
-    setUsername(e.target.value)
-  }
-
-  const handleUserPassword = (e) => {
-    setPassword(e.target.value)
-  }
-
   return (
     <form onSubmit={handleSubmit} className="login-form">
       <div className="input-wrapper">
         <label htmlFor="username">Username</label>
-        <input type="text" id="username" onChange={handleUsername} ref={usernameRef} autoComplete="on" />
+        <input type="text" id="username" ref={usernameRef} autoComplete="on" />
       </div>
       <div className="input-wrapper">
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" onChange={handleUserPassword} ref={passwordRef} autoComplete="on" />
+        <input type="password" id="password" ref={passwordRef} autoComplete="on" />
       </div>
       <div className="input-remember">
         <label htmlFor="remember-me">Remember me</label>
