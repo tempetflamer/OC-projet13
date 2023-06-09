@@ -20,7 +20,7 @@ export default function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if ((usernameRef.current.value || passwordRef.current.value) === '' || (usernameRef.current.value || passwordRef.current.value) === ' ') {
+    if (usernameRef.current.value.trim() === '' || passwordRef.current.value.trim() === '') {
       setErrorMessage('You must fill all the fields')
     } else {
       setErrorMessage('')
