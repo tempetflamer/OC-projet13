@@ -5,7 +5,6 @@ const { actions, reducer } = createSlice({
     initialState: {
         isConnected: false,
         token: null,
-        email: null,
         firstName: null,
         lastName: null,
     },
@@ -16,7 +15,6 @@ const { actions, reducer } = createSlice({
                 ...state,
                 isConnected: true,
                 token: `${action.payload.token}`,
-                email: action.payload.email
             }
 
         },
@@ -32,7 +30,6 @@ const { actions, reducer } = createSlice({
                 ...state,
                 isConnected: false,
                 token: null,
-                email: null,
                 firstName: null,
                 lastName: null,
             }
