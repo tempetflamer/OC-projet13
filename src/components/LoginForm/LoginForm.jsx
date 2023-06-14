@@ -28,7 +28,7 @@ export default function LoginForm() {
       if (res.error) {
         setErrorMessage(res.error)
       } else {
-        dispatch(actions.getToken({ token: res, email: username }))
+        dispatch(actions.getToken({ token: res }))
       }
     }
   }
